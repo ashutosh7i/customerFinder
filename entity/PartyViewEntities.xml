@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+
+    <view-entity entity-name="FindCustomerView" package="party">
+        <member-entity entity-alias="PTY" entity-name="Party"/>
+        <member-entity entity-alias="PER" entity-name="Person" join-from-alias="PTY" join-optional="true">
+          <key-map field-name="partyId"/>
+        </member-entity>
+        <member-entity entity-alias="ORG" entity-name="Organization" join-from-alias="PTY" join-optional="true">
+          <key-map field-name="partyId"/>
+        </member-entity>
+        <member-entity entity-alias="PCM" entity-name="PartyContactMech" join-from-alias="PTY">
+          <key-map field-name="partyId"/>
+        </member-entity>
+        <member-entity entity-alias="CM" entity-name="ContactMech" join-from-alias="PCM">
+          <key-map field-name="contactMechId"/>
+        </member-entity>
+        <member-entity entity-alias="CMP" entity-name="ContactMechPurpose" join-from-alias="PCM">
+          <key-map field-name="contactMechPurposeId"/>
+        </member-entity>
+        <member-entity entity-alias="TN" entity-name="TelecomNumber" join-from-alias="CM">
+          <key-map field-name="contactMechId"/>
+        </member-entity>
+
+        <alias entity-alias="PTY" name="partyId"/>
+        <alias entity-alias="PTY" name="partyTypeEnumId"/>
+        <alias entity-alias="PER" name="firstName"/>
+        <alias entity-alias="PER" name="lastName"/>
+        <alias entity-alias="PER" name="birthDate"/>
+        <alias entity-alias="PER" name="height"/>
+        <alias entity-alias="PER" name="weight"/>
+        <alias entity-alias="PER" name="occupation"/>
+        <alias entity-alias="ORG" name="organizationName"/>
+        <alias entity-alias="ORG" name="officeSiteName"/>
+        <alias entity-alias="PCM" name="contactMechPurposeId"/>
+        <alias entity-alias="TN" name="contactNumber"/>
+
+        <alias name="email" entity-alias="CM" field="infoString"/>
+
+        <entity-condition>
+          <econdition field-name="contactMechPurposeId" value="EmailPrimary"/>
+          <date-filter entity-alias="PCM" from-field-name="fromDate" thru-field-name="thruDate"/>
+        </entity-condition>
+    </view-entity>
+</entities>

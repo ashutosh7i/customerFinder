@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+  <service verb="find" noun="FindCustomer" type="script" location="component://Assignment/service/findCustomer.groovy">
+    <in-parameters>
+      <parameter name="emailAddress"/>
+      <parameter name="firstName"/>
+      <parameter name="lastName"/>
+      <parameter name="contactNumber"/>
+      <parameter name="postalAddress"/>
+      <parameter name="orderByField"/>
+      <parameter name="pageIndex" type="Integer" default-value="0"/>
+      <parameter name="pageSize" type="Integer" default-value="10"/>
+    </in-parameters>
+    
+    <out-parameters>
+      <parameter name="customerList" type="List"/>
+      <parameter name="totalCount" type="Integer"/>
+      <parameter name="pageCount" type="Integer"/>
+    </out-parameters>
+  </service>
+
+  <service verb="create" noun="CreateCustomer" type="script" location="component://Assignment/service/createCustomer.groovy">
+    <in-parameters>
+      <parameter name="emailAddress"/>
+      <parameter name="firstName"/>
+      <parameter name="lastName"/>
+    </in-parameters>
+
+    <out-parameters>
+      <parameter name="partyId"/>
+    </out-parameters>
+  </service>
+
+  <service verb="update" noun="UpdateCustomer" type="script" location="component://Assignment/service/updateCustomer.groovy" >
+    <in-parameters>
+      <parameter name="emailAddress"/>
+      <parameter name="postalAddress"/>
+      <parameter name="phoneNumber"/>
+    </in-parameters>
+
+    <out-parameters>
+      <parameter name="partyId"/>
+    </out-parameters>
+  </service>
+</services>
